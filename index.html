@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes | Gabrielle e Laura Tavares</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Frontend</title>
 </head>
 <body>
-    <header>
-        <h1>Gabrielle e Laura Tavares</h1>
+    <header class="topo">
+        <div>
+            <h1>Gabrielle e Laura Tavares</h1>
+            <p class="contagem" id="contagem">Carregando filmes...</p>
+        </div>
 
-        <a href="./cadastrar/cadastrar.html">Cadastrar novo filme</a>
+        <a class="botao" href="./cadastrar/cadastrar.html">Cadastrar filme</a>
     </header>
 
     <section class="filmes">
-    <ul id="lista-filmes"></ul>
-</section>
+        <ul id="lista-filmes"></ul>
+    </section>
+
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>

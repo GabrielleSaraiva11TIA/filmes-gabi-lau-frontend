@@ -1,63 +1,398 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
+/* ===== Tokens ===== */
+:root {
+    --veludo: #4a0d17;
+    --veludo-escuro: #33080f;
+    --papel: #f7e1da;
+    --papel-escuro: #ecc9bf;
+    --tinta: #2b0a10;
+    --tinta-suave: #7a4a50;
+    --ouro: #e9b949;
+    --ouro-escuro: #c99a2e;
+    --perigo: #b3261e;
+
+    --fonte-titulo: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+    --fonte-texto: "Instrument Sans", Arial, Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: #f2f2f2;
+    min-height: 100vh;
+    background-color: var(--veludo);
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.12) 0 2px,
+        transparent 2px 38px
+    );
+    color: var(--papel);
+    font-family: var(--fonte-texto);
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-header {
-    background-color: black;
-    color: white;
-    padding: 20px;
-    margin-bottom: 30px;
-
-    h1 {
-        margin-block: 20px;
-    }
-
-    a {
-        color: white;
-    }
+a {
+    color: inherit;
 }
 
+:focus-visible {
+    outline: 3px solid var(--ouro);
+    outline-offset: 3px;
+}
+
+/* ===== Cabeçalho ===== */
+.topo {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 56px 24px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.topo h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+}
+
+.topo .contagem {
+    margin-top: 16px;
+    color: var(--papel-escuro);
+    font-size: 1.05rem;
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--papel-escuro);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.voltar:hover {
+    color: var(--papel);
+    text-decoration: underline;
+}
+
+/* ===== Botões ===== */
+.botao {
+    display: inline-block;
+    padding: 14px 26px;
+    border: none;
+    border-radius: 999px;
+    background: var(--ouro);
+    color: var(--tinta);
+    font-family: var(--fonte-texto);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.botao:hover {
+    background: var(--ouro-escuro);
+}
+
+.botao:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* ===== Lista de ingressos ===== */
 .filmes {
-    padding: 0 20px 40px;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 0 24px 80px;
 }
 
 #lista-filmes {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px 24px;
 }
 
-.card {
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 20px;
+.ingresso {
+    display: grid;
+    grid-template-columns: 1fr 96px;
+    background: var(--papel);
+    color: var(--tinta);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 var(--veludo-escuro);
+}
+
+.ingresso.saindo {
+    animation: rasgar 0.35s ease-in forwards;
+}
+
+@keyframes rasgar {
+    to {
+        opacity: 0;
+        transform: translateY(12px) rotate(-2deg);
+    }
+}
+
+.ingresso-corpo {
+    padding: 22px 22px 18px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
+    min-width: 0;
 }
 
-
-
-.card h2 {
-    font-size: 1.2rem;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
+.ingresso .genero {
+    color: var(--tinta-suave);
+    font-size: 0.9rem;
 }
 
-.card p {
-    color: #444;
+.ingresso h2 {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 1.55rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    overflow-wrap: anywhere;
 }
 
-.card span {
-    font-weight: bold;
-    color: black;
+.ingresso .duracao {
+    font-size: 0.95rem;
+    color: var(--tinta-suave);
+}
+
+.acoes {
+    margin-top: auto;
+    padding-top: 16px;
+    display: flex;
+    gap: 18px;
+}
+
+.acao {
+    padding: 4px 0;
+    border: none;
+    background: none;
+    color: var(--tinta);
+    font-family: var(--fonte-texto);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+}
+
+.acao:hover {
+    text-decoration-thickness: 2px;
+}
+
+.acao.apagar {
+    color: var(--perigo);
+}
+
+.acao.apagar.confirmando {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--perigo);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Canhoto do ingresso, com o picote e as meias-luas */
+.ingresso-canhoto {
+    position: relative;
+    border-left: 2px dashed var(--papel-escuro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 8px;
+    text-align: center;
+}
+
+.ingresso-canhoto::before,
+.ingresso-canhoto::after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--veludo);
+}
+
+.ingresso-canhoto::before {
+    top: -10px;
+}
+
+.ingresso-canhoto::after {
+    bottom: -10px;
+}
+
+.ingresso-canhoto .rotulo {
+    font-size: 0.75rem;
+    color: var(--tinta-suave);
+    line-height: 1.2;
+}
+
+/* Selos de classificação indicativa (cores oficiais do ClassInd) */
+.classind {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: #fff;
+}
+
+.classind-L  { background: #0a9a48; }
+.classind-10 { background: #0e78c0; }
+.classind-12 { background: #f2c200; color: var(--tinta); }
+.classind-14 { background: #ee7d1a; }
+.classind-16 { background: #d62121; }
+.classind-18 { background: #000; }
+.classind-outra { background: var(--tinta-suave); }
+
+/* Estados da lista */
+.estado {
+    grid-column: 1 / -1;
+    padding: 48px 0;
+    font-size: 1.15rem;
+    color: var(--papel-escuro);
+}
+
+.estado a {
+    color: var(--ouro);
+}
+
+/* ===== Aviso flutuante ===== */
+.aviso {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 20px);
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: var(--papel);
+    color: var(--tinta);
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.aviso.visivel {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ===== Formulários (cadastrar e editar) ===== */
+.pagina-form .topo {
+    display: block;
+    max-width: 640px;
+}
+
+.pagina-form main {
+    max-width: 640px;
+    margin-inline: auto;
+    padding: 0 24px 80px;
+}
+
+.formulario {
+    background: var(--papel);
+    color: var(--tinta);
+    border-radius: 6px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo.largo {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--papel-escuro);
+    border-radius: 6px;
+    background: #fff;
+    color: var(--tinta);
+    font-family: var(--fonte-texto);
+    font-size: 1rem;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: var(--tinta);
+}
+
+.formulario .erro {
+    grid-column: 1 / -1;
+    color: var(--perigo);
+    font-weight: 600;
+    min-height: 1.5em;
+}
+
+.formulario .rodape-form {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 22px;
+    border-top: 2px dashed var(--papel-escuro);
+}
+
+.formulario .rodape-form a {
+    color: var(--tinta-suave);
+}
+
+/* ===== Responsivo e acessibilidade ===== */
+@media (max-width: 520px) {
+    .formulario {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    #lista-filmes {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
