@@ -6,12 +6,14 @@ async function buscarFilmes() {
     lista.innerHTML = ""
 
     filmes.forEach((filme) => {
-        lista.innerHTML += `
-            <li>
-                <strong>${filme.title}</strong> (${filme.gender}) — ${filme.duration} min — Classificação: ${filme.ageLimit}
-            </li>
-        `
-    })
+    lista.innerHTML += `
+        <li class="card">
+            <h2>${filme.title}</h2>
+            <p><span>Gênero:</span> ${filme.gender}</p>
+            <p><span>Duração:</span> ${filme.duration} min</p>
+            <p><span>Classificação:</span> ${filme.ageLimit}</p>
+        </li>
+    `
+})
 }
-
 buscarFilmes()
